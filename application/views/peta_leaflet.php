@@ -226,6 +226,39 @@ $.getJSON("<?=base_url()?>/assets/provinsi_polygon.geojson", function(kode){
             }).addTo(provin); 
         }); 
 
+const legend = L.control.Legend({     
+    position: "bottomright",     
+    title: "Keterangan",     
+    collapsed: true,     
+    symbolWidth: 24, 
+    opacity: 1,     
+    column: 1,     
+    legends: [{     
+    label: "Ibu Kota Provinsi",     
+    type: "image",     
+    url: "<?=base_url()?>/assets/Markerpt.png", 
+}, 
+{     
+    label: "Jaringan Sungai",     
+    type: "polyline",     
+    color: "#00FFFF",     
+    fillColor: "#00FFFF",     
+    weight: 1  
+},  
+{     
+    title: "Jaringan Sungai" 
+  
+ },  {     
+    label: "Polygon Provinsi",     
+    font: 29,     
+    type: "polygon",     
+    sides: 4,     
+    color: "#FF0000",     
+    fillColor: "#FF0000",     
+    weight: 2 
+}] 
+}).addTo(map); 
+
 
 
 
