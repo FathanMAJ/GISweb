@@ -1,9 +1,18 @@
 
 <div class="content">  
- <div id="map" style="width: 100%; height: 530px; color:black;"></div>  
+ <div id="map" style="width: 100%; height: 600px; color:black;"></div>  
 </div>  <script>  
+
+var prov = new L.LayerGroup(); 
+var faskes = new L.LayerGroup();
+var RSU = new L.LayerGroup();
+var poli = new L.LayerGroup();
+var sungai = new L.LayerGroup();
+var provin = new L.LayerGroup();
+
 var map = L.map('map', {  
- center: [-1.7912604466772375, 116.42311966554416],   zoom: 5,
+ center: [-1.7912604466772375, 116.42311966554416],   
+ zoom: 5,
  zoomControl: false,  
  layers:[]  });  
 var GoogleSatelliteHybrid= 
@@ -27,8 +36,13 @@ var baseLayers = {
     'GoogleMaps' : GoogleMaps,
     'GoogleRoads' :GoogleRoads
  };
-var overlayLayers = {}
-L.control.layers(baseLayers, overlayLayers, {collapsed: true}).addTo(map);
+
+var groupedOverlays = {
+"Peta Dasar":{
+'Ibu Kota Provinsi' : prov}
+};
+
+L.control.groupedLayers(baseLayers, groupedOverlays, ).addTo(map)
 
 var
 osmUrl='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
@@ -100,6 +114,20 @@ var div = L.DomUtil.create("div", "info legend");
 div.innerHTML = '<img src="<?=base_url()?>assets/mata-angin.png"style=width:200px;>';
 return div; }
 north.addTo(map);
+
+$.getJSON("<?=base_url()?>assets/provinsi.geojson",function(data){
+var ratIcon = L.icon({
+iconUrl: '<?=base_url()?>assets/Markerpt.png',
+iconSize: [15,25]
+});
+L.geoJson(data,{
+pointToLayer: function(feature,latlng){
+var marker = L.marker(latlng,{icon: ratIcon});
+marker.bindPopup(feature.properties.CITY_NAME);
+return marker; }
+}).addTo(prov);
+});
+
 </script> 
 
 
