@@ -10,4 +10,4 @@ $data = array(
 $this->load->view('layout/viewunion', $data, FALSE);
 }
 }
-/* End of file Home.php *
+/* End of file Home.php */
