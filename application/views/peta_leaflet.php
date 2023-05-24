@@ -1,8 +1,10 @@
 
 <div class="content">  
  <div id="map" style="width: 100%; height: 530px; color:black;"></div>  
-</div>  <script>  var map = L.map('map', {  
- center: [-1.7912604466772375, 116.42311966554416],   zoom: 5,  
+</div>  <script>  
+var map = L.map('map', {  
+ center: [-1.7912604466772375, 116.42311966554416],   zoom: 5,
+ zoomControl: false,  
  layers:[]  });  
 var GoogleSatelliteHybrid= 
 L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {  maxZoom: 22,  attribution: 'Latihan Web GIS'  
@@ -10,8 +12,7 @@ L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {  maxZoom: 22
 
 var baseLayers = {'Google Satellite Hybrid': GoogleSatelliteHybrid};
 var overlayLayers = {}
-L.control.layers(baseLayers, overlayLayers, {collapsed:
-false}).addTo(map);
+L.control.layers(baseLayers, overlayLayers, {collapsed: true}).addTo(map);
 
 var
 osmUrl='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
@@ -26,6 +27,41 @@ true, position : "bottomright",
 aimingRectOptions : rect1, shadowRectOptions:
 rect2}).addTo(map);
 
+L.Control.geocoder({position :"topleft", collapsed:false}).addTo(map);
+
+/* GPS enabled geolocation control set to follow the user's location
+*/
+var locateControl = L.control.locate({
+position: "topleft",
+drawCircle: true,
+follow: true,
+setView: true,
+keepCurrentZoomLevel: true,
+markerStyle: {
+weight: 1,
+opacity: 0.8,
+fillOpacity: 0.8
+},
+circleStyle: {
+weight: 1,
+clickable: false
+},
+icon: "fa fa-location-arrow",
+metric: false,
+strings: {
+title: "My location",
+popup: "You are within {distance} {unit} from this point",
+outsideMapBoundsMsg: "You seem located outside the boundaries of themap"
+},
+locateOptions: {
+maxZoom: 18,
+watch: true,
+enableHighAccuracy: true,
+
+maximumAge: 10000,
+timeout: 10000
+}
+}).addTo(map);
 </script> 
 
 
