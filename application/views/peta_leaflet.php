@@ -38,9 +38,16 @@ var baseLayers = {
  };
 
 var groupedOverlays = {
-"Peta Dasar":{
-'Ibu Kota Provinsi' : prov}
+    "Peta Dasar":{
+        'Ibu Kota Provinsi' : prov
+    },
+    "Peta Khusus":{ 
+        'Rumah Sakit Umum': RSU, 
+        'Puskesmas': faskes, 
+        'Poliklinik': poli 
+    } 
 };
+
 
 L.control.groupedLayers(baseLayers, groupedOverlays, ).addTo(map)
 
@@ -127,6 +134,49 @@ marker.bindPopup(feature.properties.CITY_NAME);
 return marker; }
 }).addTo(prov);
 });
+
+
+$.getJSON("<?=base_url()?>assets/RSU.geojson",function(data){                  
+    var ratIcon = L.icon({                      
+        iconUrl: '<?=base_url()?>assets/HOSPITAL.png',                      
+        iconSize: [8,12]  
+                });  
+                L.geoJson(data,{                      
+                pointToLayer: function(feature,latlng){                      
+                var marker = L.marker(latlng,{icon: ratIcon});                      
+                marker.bindPopup(feature.properties.NAMOBJ);                      
+                return marker;                      }  
+                }).addTo(RSU);  
+    }); 
+$.getJSON("<?=base_url()?>assets/puskesmas.geojson",function(data){                  
+    var ratIcon = L.icon({                     
+        iconUrl: '<?=base_url()?>assets/ULER.png',                      
+        iconSize: [12,10]  
+                });  
+                L.geoJson(data,{  
+                pointToLayer: function(feature,latlng){                      
+                var marker = L.marker(latlng,{icon: ratIcon});                      
+                marker.bindPopup(feature.properties.NAMOBJ);                      
+                return marker;  
+                    }  
+                }).addTo(faskes);  
+    }); 
+ 
+$.getJSON("<?=base_url()?>assets/poliklinik.geojson",function(data){                  
+    var ratIcon = L.icon({                      
+        iconUrl: '<?=base_url()?>assets/PLUS.png',                      
+        iconSize: [12,10]  
+                });  
+                L.geoJson(data,{                      
+                pointToLayer: function(feature,latlng){                      
+                var marker = L.marker(latlng,{icon: ratIcon});                      
+                marker.bindPopup(feature.properties.NAMOBJ);                      
+                return marker;  
+                    }  
+                }).addTo(poli);  
+}); 
+
+
 
 </script> 
 
