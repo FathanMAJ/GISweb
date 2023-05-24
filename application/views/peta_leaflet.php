@@ -13,7 +13,20 @@ L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {  maxZoom: 22
 var Esri_NatGeoWorldMap =
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', { attribution: 'Tiles © Esri — NationalGeographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI,NRCAN, GEBCO, NOAA, iPC', maxZoom: 16 });
 
-var baseLayers = { 'Google Satellite Hybrid': GoogleSatelliteHybrid,'Esri_NatGeoWorldMap':Esri_NatGeoWorldMap };
+var GoogleMaps = new
+L.TileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {opacity: 1.0, 
+attribution: 'Latihan Web GIS' }); 
+
+var GoogleRoads = new
+L.TileLayer('https://mt1.google.com/vt/lyrs=h&x={x}&y={y}&z={z}',{ opacity: 1.0, 
+attribution: 'Latihan Web GIS' });
+
+var baseLayers = { 
+    'Google Satellite Hybrid': GoogleSatelliteHybrid,
+    'Esri_NatGeoWorldMap':Esri_NatGeoWorldMap,
+    'GoogleMaps' : GoogleMaps,
+    'GoogleRoads' :GoogleRoads
+ };
 var overlayLayers = {}
 L.control.layers(baseLayers, overlayLayers, {collapsed: true}).addTo(map);
 
