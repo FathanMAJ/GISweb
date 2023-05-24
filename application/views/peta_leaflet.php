@@ -7,6 +7,12 @@
 var GoogleSatelliteHybrid= 
 L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {  maxZoom: 22,  attribution: 'Latihan Web GIS'  
 }).addTo(map); 
+
+var baseLayers = {'Google Satellite Hybrid': GoogleSatelliteHybrid};
+var overlayLayers = {}
+L.control.layers(baseLayers, overlayLayers, {collapsed:
+false}).addTo(map);
+
 </script> 
 
 
