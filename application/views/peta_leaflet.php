@@ -13,6 +13,9 @@ var overlayLayers = {}
 L.control.layers(baseLayers, overlayLayers, {collapsed:
 false}).addTo(map);
 
+<link rel="stylesheet" href="<?=base_url()?>assets/Control.MiniMap.css" />
+<script src="<?=base_url()?>assets/Control.MiniMap.js"></script>
+
 </script> 
 
 
