@@ -10,7 +10,10 @@ var GoogleSatelliteHybrid=
 L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {  maxZoom: 22,  attribution: 'Latihan Web GIS'  
 }).addTo(map); 
 
-var baseLayers = {'Google Satellite Hybrid': GoogleSatelliteHybrid};
+var Esri_NatGeoWorldMap =
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', { attribution: 'Tiles © Esri — NationalGeographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI,NRCAN, GEBCO, NOAA, iPC', maxZoom: 16 });
+
+var baseLayers = { 'Google Satellite Hybrid': GoogleSatelliteHybrid,'Esri_NatGeoWorldMap':Esri_NatGeoWorldMap };
 var overlayLayers = {}
 L.control.layers(baseLayers, overlayLayers, {collapsed: true}).addTo(map);
 
@@ -26,6 +29,8 @@ var miniMap = new L.Control.MiniMap(osm2, {toggleDisplay:
 true, position : "bottomright",
 aimingRectOptions : rect1, shadowRectOptions:
 rect2}).addTo(map);
+
+
 
 L.Control.geocoder({position :"topleft", collapsed:false}).addTo(map);
 
