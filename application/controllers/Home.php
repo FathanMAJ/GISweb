@@ -4,7 +4,7 @@ class Home extends CI_Controller {
 public function index()
 {
 $data = array(
-'judul' => 'WebGIS Training',
+'judul' => 'WebGIS Deadly Training',
 'content' => 'peta_leaflet'
 );
 $this->load->view('layout/viewunion', $data, FALSE);
